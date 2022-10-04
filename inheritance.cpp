@@ -4,12 +4,47 @@ using namespace std;
 
 // Taxi Company simulation
 
-class Customer
+class Taxi_Company
+{
+public:
+    //
+};
+
+class Person:Taxi_Company
 {
 public:
     string name;
     string forename;
     string phone_number;
+
+};
+
+class Economy_Management:Taxi_Company
+{
+public:
+
+    float income = 0;
+    float amount = 0;
+    float price = 0;
+    string rating;
+
+    void return_salary() {
+        cout << "Good job, keep going !" << endl;
+    }
+
+    void return_income() {
+        cout << "A very good profit for today !!!" << endl;
+    }
+
+    void return_rating() {
+        cout << "We are proud of you !!!" << endl;
+    }
+};
+
+
+class Customer:public Person
+{
+public:
 
     Customer(string c_name, string c_forename, string c_phone_number)
     {
@@ -24,12 +59,10 @@ public:
     }
 };
 
-class Operator
+class Operator:public Person
 {
 public:
-    string name;
-    string forename;
-    string phone_number;
+
     int salary;
     int age;
     string IDNP;
@@ -49,14 +82,13 @@ public:
     }
 };
 
-class Booking
+class Booking:public Economy_Management
 {
 public:
     string starting_time;
     string arrival_time;
     string current_destination;
     string destination;
-    float price;
 
     Booking(string b_starting_time, string b_arrival_time, string b_current_destination, string b_destination, float b_price)
     {
@@ -73,13 +105,10 @@ public:
     }
 };
 
-class Taxi_Driver
+class Taxi_Driver:Person
 {
 public:
-    string name;
-    string forename;
     string car;
-    string phone_number;
     int salary;
     int age;
     string IDNP;
@@ -100,7 +129,7 @@ public:
     }
 };
 
-class Car
+class Car:Taxi_Company
 {
 public:
     string name;
@@ -132,12 +161,10 @@ public:
     }
 };
 
-class Payment
+class Payment:public Economy_Management
 {
 public:
     string payment_type;
-    float amount;
-
 
     Payment(string c_payment_type, float c_amount)
     {
@@ -160,12 +187,10 @@ public:
     }
 };
 
-class Admin
+class Admin:public Person
 {
 public:
-    string name;
-    string forename;
-    string phone_number;
+
     float income_amount = 0;
     int age;
     string IDNP;
@@ -187,30 +212,26 @@ public:
 
     void manage_salary(float customer_amount) {
         income_amount = income_amount + customer_amount;
-        cout << "The income for this day is " << income_amount << " $" << endl;
+        cout << "The income for this day is " << income_amount << " $. ";
     }
 
 
 };
 
-class Salary
+class Salary:public Economy_Management
 {
 public:
-    float salary = 0;
 
     float calculate_salary(float customer_income){
-        salary = salary + customer_income;
-        return salary;
+        income = income + customer_income;
+        return income;
     }
-
 
 };
 
-class Income
+class Income: public Economy_Management
 {
 public:
-    int income = 0;
-
 
     float calculate_income(float current_income){
         income = income + current_income - (current_income*0.5);
@@ -218,10 +239,9 @@ public:
     }
 };
 
-class Rating
+class Rating: public Economy_Management
 {
 public:
-    string rating;
     
     void ride_rating(string rating){
     	cout << "The customed sad that ride was " << rating << " out of 10" << endl;
@@ -273,9 +293,10 @@ int main()
     admin_x.manage_company();
 
     admin_x.manage_salary(income_daily);
+    salary_x.return_income();
 
-    cout << "The salary for " << customer_x.forename << " now is " << salary_x.calculate_salary(tom_income - (tom_income*0.5)) << " $"<< endl;
-
+    cout << "The salary for " << customer_x.forename << " at the moment is " << salary_x.calculate_salary(tom_income - (tom_income*0.5)) << " $. ";
+    salary_x.return_salary();
     cout << "The income for Tom is " << tom_income_total << " $" << endl;
     
 
