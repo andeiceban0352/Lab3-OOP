@@ -7,7 +7,10 @@ using namespace std;
 class Taxi_Company
 {
 public:
-    //
+    void tx_ocmpany() {
+        cout << "Taxi Company";
+    }
+
 };
 
 class Person:Taxi_Company
@@ -108,11 +111,9 @@ public:
 class Taxi_Driver:Person
 {
 public:
-    string car;
     int salary;
     int age;
     string IDNP;
-    int tip;// bacsis
 
     Taxi_Driver(string t_name, string t_forename, string t_phone_number, int t_age, string t_IDNP)
     {
